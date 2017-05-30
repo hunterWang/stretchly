@@ -117,6 +117,7 @@ class BreaksPlanner {
       } else {
         let breakType = this.nextBreakType()
         if (breakType) {
+          console.log(this.scheduler.timeLeft);
           remainTime = `${Utils.formatTillBreak(this.scheduler.timeLeft)}`
         }
       }
