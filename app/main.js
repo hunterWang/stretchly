@@ -62,12 +62,22 @@ function createTrayIcon () {
   const iconFolder = path.join(__dirname, 'images')
   if (process.platform === 'darwin') {
     appIcon = new Tray(iconFolder + '/trayTemplate.png')
+    setInterval(updateTrayTitle, 10000)
   } else {
     appIcon = new Tray(iconFolder + '/stretchly_18x18.png')
   }
   appIcon.setContextMenu(getTrayMenu())
   updateToolTip()
+  updateTrayTitle()
   setInterval(updateToolTip, 10000)
+}
+
+function updateTrayTitle(){
+  if(!breakPlanner){
+    appIcon.setTitle("Initial");
+  }else{
+    appIcon.setTitle(breakPlanner.remainTime);
+  }
 }
 
 function startProcessWin () {
@@ -425,6 +435,7 @@ function updateToolTip () {
     appIcon.setToolTip(toolTipHeader)
   } else {
     appIcon.setToolTip(toolTipHeader + breakPlanner.status)
+    // console.log("hunter" + breakPlanner.remainTime);
   }
 }
 
