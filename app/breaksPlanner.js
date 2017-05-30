@@ -108,6 +108,22 @@ class BreaksPlanner {
     return statusMessage
   }
 
+//get the time left
+  get remainTime(){ 
+    let remainTime =''
+    if (this.scheduler) {
+      if (this.isPaused) {
+        remainTime = 'pause';
+      } else {
+        let breakType = this.nextBreakType()
+        if (breakType) {
+          remainTime = `${Utils.formatTillBreak(this.scheduler.timeLeft)}`
+        }
+      }
+    }
+    return remainTime
+  }
+
   nextBreakType () {
     if (this.scheduler.func === this.microbreakFunc) {
       return 'microbreak'
