@@ -17,6 +17,7 @@ let formatTillBreak = function (milliseconds) {
   let minutes = Math.round(milliseconds / 60000)
   if (minutes < 1) {
     let seconds = Math.round((milliseconds % 60000) / 5000) * 5
+    seconds = (seconds>0) ? seconds : 0 ;
     return `~${seconds}s`
   } else {
     return `${minutes}m`
